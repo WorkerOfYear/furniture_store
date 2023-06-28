@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+    {% for subcategory in subcategories %}
+    <figure>
+        <figcaption>{{subcategory.name}}</figcaption>
+        <img src="{% static subcategory.photo.url %}" alt="{{subcategory.name}}">
+    </figure>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    category field
+</div>
+
+<div>
+    {% for category in categories %}
+        <p><a href="{% url 'sub-catalog' category.id %}">{{category}}</a></p>
+    {% endfor %}
+</div>
+{% endblock %}
