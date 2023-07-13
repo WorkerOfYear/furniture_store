@@ -1,11 +1,15 @@
-{% extends 'index.html' %}
+{% extends 'catalog/home.html' %}
 {% load static %}
 
 {% block content %}
+<div class="subcatalog">
     {% for subcategory in subcategories %}
-    <figure>
-        <figcaption>{{subcategory.name}}</figcaption>
-        <img src="{% static subcategory.photo.url %}" alt="{{subcategory.name}}">
-    </figure>
+    <div class="subcatalog-element">
+        <figure>
+            <img src="{% static subcategory.photo.url %}" alt="{{subcategory.name}}">
+            <figcaption>{{subcategory.name}}</figcaption>
+        </figure>
+    </div>
     {% endfor %}
+</div>
 {% endblock %}

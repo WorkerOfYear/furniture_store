@@ -1,13 +1,11 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div>
-    category field
-</div>
-
-<div>
-    {% for category in categories %}
+<div id='content-wrapper'>
+    <div class="main-content">
+        {% for category in categories %}
         <p><a href="{% url 'sub-catalog' category.id %}">{{category}}</a></p>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

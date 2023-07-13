@@ -1,29 +1,35 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
     <title>index</title>
 </head>
 
 <body>
 
-    <div>
-        Header
+    <div class="header">
+        {% include 'header.html' %}
     </div>
 
-    <div>
-        navbar
+    <div class="navbar">
+        {% include 'navbar.html' %}
     </div>
 
-    <div>
-        {% block content %}
+    <div class="content">
+        <div class="container">
+            {% include 'catalog/sidebar.html' %}
 
-        {% endblock %}
+            {% block content %}
+
+            {% endblock %}
+        </div>
     </div>
 
-    <div>
+    <div class="footer">
         footer
     </div>
 
