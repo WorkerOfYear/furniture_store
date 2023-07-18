@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party
+    'rest_framework',
     'debug_toolbar',
+
+    # Local
     'catalog.apps.CatalogConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +87,7 @@ WSGI_APPLICATION = 'market.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "testdb",
+        "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "12345",
         "HOST": "localhost", # set in docker-compose.yml

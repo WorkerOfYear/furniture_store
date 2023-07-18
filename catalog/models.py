@@ -42,5 +42,7 @@ class Product(models.Model):
     subcategory = models.ManyToManyField(SubCategory)
     discount = models.ManyToManyField(Discount)
 
+    photo = models.ImageField(null=True, default='default.png')
+
     def __str__(self) -> str:
         return str(self.name)

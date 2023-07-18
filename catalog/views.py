@@ -1,7 +1,12 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from .models import Category, SubCategory, Product
 
+
+def ProductListView(ListView):
+    model = Product
+    template_name = 'products.html'
 
 def home(request):
 
