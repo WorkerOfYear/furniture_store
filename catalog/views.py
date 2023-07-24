@@ -8,6 +8,11 @@ def ProductListView(ListView):
     model = Product
     template_name = 'products.html'
 
+
+def SubCategoryListView(ListView):
+    pass
+
+
 def home(request):
 
     categories = Category.objects.all()
