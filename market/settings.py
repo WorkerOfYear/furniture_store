@@ -45,11 +45,17 @@ INSTALLED_APPS = [
 
     # Local
     'catalog.apps.CatalogConfig',
-    'api.apps.ApiConfig',
-    'accounts.apps.AccountsConfig',
+    # 'api.apps.ApiConfig',
+    # 'accounts.apps.AccountsConfig',
 ]
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -97,7 +103,7 @@ WSGI_APPLICATION = 'market.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "testdb",
+        "NAME": "django_testdb",
         "USER": "postgres",
         "PASSWORD": "12345",
         "HOST": "localhost", # set in docker-compose.yml
