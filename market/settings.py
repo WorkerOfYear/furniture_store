@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# SESSIONS
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -39,24 +41,42 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3rd party
-    'rest_framework',
     'debug_toolbar',
+    'rest_framework',
+    'corsheaders',
 
     # Local
     'catalog.apps.CatalogConfig',
-    'api.apps.ApiConfig',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    # 'api.apps.ApiConfig',
+    # 'accounts.apps.AccountsConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+)
 
 ROOT_URLCONF = 'market.urls'
 
@@ -73,6 +93,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Local
+                'cart.context_processors.cart'
             ],
         },
     },
@@ -87,7 +110,7 @@ WSGI_APPLICATION = 'market.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "django_testdb",
         "USER": "postgres",
         "PASSWORD": "12345",
         "HOST": "localhost", # set in docker-compose.yml

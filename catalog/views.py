@@ -1,31 +1,58 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Product
+from cart.forms import CartAddProductForm
 
-from .models import Category, SubCategory, Product
-
-
-def ProductListView(ListView):
-    model = Product
-    template_name = 'products.html'
-
-def home(request):
-
+def product_list(request, category_slug=None):
+    category = None
     categories = Category.objects.all()
+    products = Product.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = products.filter(category=category)
+    return render(request,
+                  'catalog/product/list.html',
+                  {'category': category,
+                   'categories': categories,
+                   'products': products})
 
-    context = {
-        'categories': categories
-    }
+def product_detail(request, id, slug):
+    product = get_object_or_404(Product,
+                                id=id,
+                                slug=slug,
+                                available=True)
+    cart_product_form = CartAddProductForm()
+    return render(request,
+                  'catalog/product/detail.html',
+                  {'product': product,
+                   'cart_product_form': cart_product_form,})
+    
+# def ProductListView(ListView):
+#     model = Product
+#     template_name = 'products.html'
 
-    return render(request, 'catalog/home.html', context)
+
+# def SubCategoryListView(ListView):
+#     pass
 
 
-def catalog(request, pk):
+# def home(request):
 
-    category = Category.objects.get(id=pk)
-    subcategories = category.subcategory.select_related()
+#     categories = Category.objects.all()
 
-    context = {
-        'subcategories': subcategories
-    }
+#     context = {
+#         'categories': categories
+#     }
 
-    return render(request, 'catalog/subcatalog.html', context)
+#     return render(request, 'catalog/home.html', context)
+
+
+# def catalog(request, pk):
+
+#     category = Category.objects.get(id=pk)
+#     subcategories = category.subcategory.select_related()
+
+#     context = {
+#         'subcategories': subcategories
+#     }
+
+#     return render(request, 'catalog/subcatalog.html', context)
