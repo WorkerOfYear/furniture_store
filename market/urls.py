@@ -10,8 +10,8 @@ urlpatterns = [
     path("api/", include("api.urls")),
     path('api-auth/', include('rest_framework.urls')),
     
-    
     path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
     path('', include('catalog.urls', namespace='catalog')),
 ]
 
